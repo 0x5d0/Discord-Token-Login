@@ -1,0 +1,35 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.12.0'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += ['src/main/java/']
+        }
+    }
+}
+
+task applicationJar(type: ShadowJar) {
+    archiveBaseName.set 'TokenLogin'
+    archiveVersion.set ''
+    archiveClassifier.set ''
+    dependsOn compileJava
+    from sourceSets.main.output
+    project.configurations.implementation.canBeResolved = true
+    configurations = [project.configurations.implementation]
+    manifest {
+        attributes 'Main-Class' : 'tokenlogin.TokenLogin'
+    }
+}
