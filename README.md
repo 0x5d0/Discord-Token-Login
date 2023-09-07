@@ -1,7 +1,7 @@
 Simple Discord token log-in utility written in Java with Selenium.
 
 ## Requirements
-- Tested on Java 17
+- Java 8+
 - Selenium Chrome Driver
 - Google Chrome
 
